@@ -4,7 +4,14 @@
 
 fieldset {
     min-width: 0;
-    border: 0;
+    border: 1px dotted rgb(12, 12, 12);
+    background-color: #f5faff;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+legend {
+    font-size: 1.1rem;
 }
 
 .loginLinks {

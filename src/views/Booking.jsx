@@ -5,16 +5,14 @@ function Booking() {
     const [flightsForAirline, setFlightsForAirline] = useState([])
     const [chosenFlight, setChosenFlight] = useState(0)
 
-    const getTheAirlinesStateFromTheAPI = () => {
-        fetch("http://localhost:8000/airlines", {
+    const getTheAirlinesStateFromTheAPI = async () => {
+        const response = await fetch("http://localhost:8000/airlines", {
             headers: {
                 "Authorization": `Token ${JSON.parse(localStorage.getItem("wanderella_token")).token}`
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                setAirlines(data)
-            })
+        const parsedJSONString = await response.json()
+        setAirlines(parsedJSONString)
     }
 
     const goGetFlightsForAirline = (changeEvent) => {
@@ -29,35 +27,39 @@ function Booking() {
             })
     }
 
-    useEffect(() => {
-        getTheAirlinesStateFromTheAPI()
-    }, [])
+    useEffect(() => { getTheAirlinesStateFromTheAPI() }, [])
 
     return (
         <div>
-            <form>
+            <h1>Book a New Adventure</h1>
+            <form className="bookingform">
                 <fieldset>
+                    <legend>Choose an airline</legend>
+
                     <label>Select an airline:</label>
                     <select id="airlines" onChange={(event) => goGetFlightsForAirline(event)}>
                         <option value="0">-- Choose airline --</option>
                         {
-                            airlines.map(airline => <option key={`airline--${airline.id}`} value={airline.id}>{airline.name}</option>
-                            )
+                            airlines.map(airline => <option key={`airline--${airline.id}`} value={airline.id}>{airline.name}</option>)
                         }
                     </select>
                 </fieldset>
 
-                <fieldset>
-                    <legend>Choose a flight</legend>
+                {
+                    flightsForAirline.length
+                        ? <fieldset>
+                            <legend>Choose a flight</legend>
 
-                    {
-                        flightsForAirline.map(flight => <span key={`flight--${flight.id}`}>
-                            <input type="radio"
-                                name="flight"
-                                onChange={() => setChosenFlight(flight.id)} />{flight.flight_number}
-                        </span>)
-                    }
-                </fieldset>
+                            {
+                                flightsForAirline.map(flight => <span key={`flight--${flight.id}`}>
+                                    <input type="radio"
+                                        name="flight"
+                                        onChange={() => setChosenFlight(flight.id)} />{flight.flight_number}
+                                </span>)
+                            }
+                        </fieldset>
+                        : ""
+                }
             </form>
         </div>
     )

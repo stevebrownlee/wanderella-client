@@ -16,6 +16,7 @@ export const ApplicationViews = () => {
             <Route element={<Authorized />}>
                 <Route path="/" element={ <Home /> } />
                 <Route path="/booking" element={ <Booking /> } />
+                <Route path="/travels" element={ <h1>My Travel Log</h1> } />
             </Route>
 
         </Routes>

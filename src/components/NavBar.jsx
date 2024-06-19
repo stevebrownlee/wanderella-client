@@ -6,11 +6,14 @@ export const NavBar = () => {
     return (
         <ul className="navbar">
             <li className="navbar__item">
+                <NavLink to={"/booking"}>Book Adventure</NavLink>
+            </li>
+            <li className="navbar__item">
                 <NavLink to={"/travels"}>My Travels</NavLink>
             </li>
             {
                 (localStorage.getItem("wanderella_token") !== null) ?
-                    <li className="navbar__item">
+                    <li className="navbar__item lastitem">
                         <button className="underline text-blue-600 hover:text-purple-700"
                             onClick={() => {
                                 localStorage.removeItem("wanderella_token")
