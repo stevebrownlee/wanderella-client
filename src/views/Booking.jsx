@@ -55,6 +55,28 @@ function Booking() {
         setFoundHotels(parsedJSONString)
     }
 
+    const createBooking = async () => {
+        const response = await fetch("http://localhost:8000/bookings", {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${JSON.parse(localStorage.getItem("wanderella_token")).token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "hotelId": chosenHotel.id,
+                "flightId": chosenFlight.id,
+                "carId": chosenCar,
+                "price": adventurePrice,
+                "bookingDate": adventureDate
+            })
+        })
+        if (response.status === 201) {
+            return window.alert("Adventure successfully booked")
+        }
+
+        window.alert("There was error booking the adventure")
+    }
+
     useEffect(() => {
         getTheAirlinesStateFromTheAPI()
         getCarRentalOptionsFromAPI()
@@ -80,7 +102,6 @@ function Booking() {
                     flightsForAirline.length
                         ? <fieldset>
                             <legend>Choose a flight</legend>
-
                             {
                                 flightsForAirline.map(flight => <span key={`flight--${flight.id}`}>
                                     <input type="radio"
@@ -97,6 +118,7 @@ function Booking() {
 
                     <input type="text" placeholder='Enter city...' value={searchCity}
                         onChange={e => setSearchCity(e.target.value)}
+                        onKeyDown={e => e.preventDefault()}
                         onKeyUp={e => {
                             if (e.key === "Enter") {
                                 findHotelForCity()
@@ -150,6 +172,7 @@ function Booking() {
                     <input type="number" value={adventurePrice} onChange={e => setPrice(e.target.value)} />
                 </fieldset>
 
+                <button onClick={createBooking}>Book Adventure</button>
 
             </form>
         </div>
