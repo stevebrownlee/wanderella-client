@@ -24,6 +24,12 @@ jobs:
       - name: Build the React app
         run: npm run build
 
+      - name: Verify dist directory exists
+        run: ls -la dist
+
+      - name: List project directory
+        run: ls -la
+
       - name: Deploy to GitHub Pages
         run: npm run deploy
         env:
