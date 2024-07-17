@@ -24,6 +24,11 @@ jobs:
       - name: Build the React app
         run: npm run build
 
+      - name: Configure Git
+        run: |
+          git config --global user.email "steve@stevebrownlee.com"
+          git config --global user.name "Steve Brownlee"
+
       - name: Verify dist directory exists
         run: ls -la dist
 
