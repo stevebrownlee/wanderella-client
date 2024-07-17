@@ -1,41 +1,31 @@
-name: Deploy React App to GitHub Pages
+name: "Deploy to GitHub Pages"
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+    deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+            - name: Setup Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "18"
 
-      - name: Install dependencies
-        run: npm install
+            - name: Install dependencies
+              run: npm install
 
-      - name: Build the React app
-        run: npm run build
+            - name: Build
+              run: npm run build
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "steve@stevebrownlee.com"
-          git config --global user.name "Steve Brownlee"
-
-      - name: Verify dist directory exists
-        run: ls -la dist
-
-      - name: List project directory
-        run: ls -la
-
-      - name: Deploy to GitHub Pages
-        run: npm run deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Deploy
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./dist
+                  publish_branch: gh-pages
