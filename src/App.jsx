@@ -38,7 +38,7 @@ function App() {
     <div>
       <form>
         <fieldset>
-          <label>Select an airline:</label>
+          <label>Select an airline to travel with:</label>
           <select id="airlines" onChange={(event) => goGetFlightsForAirline(event)}>
             <option value="0">-- Choose airline --</option>
             {
