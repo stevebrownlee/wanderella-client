@@ -7,7 +7,7 @@ function App() {
   const [chosenFlight, setChosenFlight] = useState(0)
 
   const getTheAirlinesStateFromTheAPI = () => {
-    fetch("http://localhost:8000/airlines", {
+    fetch("https://whale-app-pixao.ondigitalocean.app/airlines", {
       headers: {
         "Authorization": "Token e71c19e5deb906fac5f2b3a4e7491bac4d41c6da"
       }
@@ -19,7 +19,7 @@ function App() {
   }
 
   const goGetFlightsForAirline = (changeEvent) => {
-    fetch(`http://localhost:8000/flights?airline=${changeEvent.target.value}`, {
+    fetch(`https://whale-app-pixao.ondigitalocean.app/flights?airline=${changeEvent.target.value}`, {
       headers: {
         "Authorization": "Token e71c19e5deb906fac5f2b3a4e7491bac4d41c6da"
       }

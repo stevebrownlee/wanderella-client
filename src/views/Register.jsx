@@ -12,7 +12,7 @@ export const Register = () => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:8000/register`, {
+        fetch(`https://whale-app-pixao.ondigitalocean.app/register`, {
             method: "POST",
             body: JSON.stringify({
                 email: email,

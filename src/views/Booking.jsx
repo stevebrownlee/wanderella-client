@@ -14,7 +14,7 @@ function Booking() {
     const [chosenHotel, setChosenHotel] = useState({})
 
     const getTheAirlinesStateFromTheAPI = async () => {
-        const response = await fetch("http://localhost:8000/airlines", {
+        const response = await fetch("https://whale-app-pixao.ondigitalocean.app/airlines", {
             headers: {
                 "Authorization": `Token ${JSON.parse(localStorage.getItem("wanderella_token")).token}`
             }
@@ -24,7 +24,7 @@ function Booking() {
     }
 
     const getCarRentalOptionsFromAPI = async () => {
-        const response = await fetch("http://localhost:8000/cars", {
+        const response = await fetch("https://whale-app-pixao.ondigitalocean.app/cars", {
             headers: {
                 "Authorization": `Token ${JSON.parse(localStorage.getItem("wanderella_token")).token}`
             }
@@ -34,7 +34,7 @@ function Booking() {
     }
 
     const goGetFlightsForAirline = (changeEvent) => {
-        fetch(`http://localhost:8000/flights?airline=${changeEvent.target.value}`, {
+        fetch(`https://whale-app-pixao.ondigitalocean.app/flights?airline=${changeEvent.target.value}`, {
             headers: {
                 "Authorization": `Token ${JSON.parse(localStorage.getItem("wanderella_token")).token}`
             }
@@ -46,7 +46,7 @@ function Booking() {
     }
 
     const findHotelForCity = async () => {
-        const response = await fetch(`http://localhost:8000/hotels?city=${searchCity}`, {
+        const response = await fetch(`https://whale-app-pixao.ondigitalocean.app/hotels?city=${searchCity}`, {
             headers: {
                 "Authorization": `Token ${JSON.parse(localStorage.getItem("wanderella_token")).token}`
             }
@@ -56,7 +56,7 @@ function Booking() {
     }
 
     const createBooking = async () => {
-        const response = await fetch("http://localhost:8000/bookings", {
+        const response = await fetch("https://whale-app-pixao.ondigitalocean.app/bookings", {
             method: "POST",
             headers: {
                 "Authorization": `Token ${JSON.parse(localStorage.getItem("wanderella_token")).token}`,
